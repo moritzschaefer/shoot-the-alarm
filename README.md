@@ -1,4 +1,12 @@
 shoot-the-alarm
 ===============
+ TODO
 
-A target to shoot at to disable your ringing alarm (android)
+SCHALTKREIS
+- Den Schaltkreis bauen, immo Presspoint mit Widerstand zu simulieren.
+
+ANDROID
+- Android Wecker abfangen 
+- Bluetoothverbindung mit PI herstellen
+- sinnvolle Signale über die Verbindung senden
+- PI einrichten
