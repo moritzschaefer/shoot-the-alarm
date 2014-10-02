@@ -15,6 +15,7 @@ import za.co.neilson.alarm.Alarm;
 import za.co.neilson.alarm.R;
 
 import android.app.Activity;
+import android.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -48,6 +49,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
     private TextView problemView;
     private TextView answerView;
     private String answerString;
+    private BluetoothClass connection;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,6 +150,8 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 
     private void startAlarm() {
 
+        connection = new BluetoothClass(this);
+
         if (alarm.getAlarmTonePath() != "") {
             mediaPlayer = new MediaPlayer();
             if (alarm.getVibrate()) {
@@ -236,4 +240,25 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
         }
         this.finish();
     }
+
+    public void bluetoothQuit(){
+        if (!alarmActive)
+            return;
+
+        alarmActive = false;
+        if (vibrator != null)
+            vibrator.cancel();
+        try {
+            mediaPlayer.stop();
+        } catch (IllegalStateException ise) {
+
+        }
+        try {
+            mediaPlayer.release();
+        } catch (Exception e) {
+
+        }
+        this.finish();
+    }
+
 }
