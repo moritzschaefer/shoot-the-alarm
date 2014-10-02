@@ -2,14 +2,14 @@
 <pre-dex-items>
 
     <item
-        dex="/home/maximus/AndroidStudioProjects/Android-Alarm-Clock-master/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-f6f5a7575ade17b6d351d1f7e57b879abf9189c6.jar"
-        jar="/home/maximus/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
+        dex="/home/moritz/Dropbox/Projects/shoot-the-alarm/androidApp/Android-Alarm-Clock-master/app/build/intermediates/pre-dexed/debug/support-v4-18.0.0-3454356021110e75bb2762d5e4d24fc65a4e6b20.jar"
+        jar="/home/moritz/Apps/android-studio/sdk/extras/android/m2repository/com/android/support/support-v4/18.0.0/support-v4-18.0.0.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="44ec51e9d395a47aab135e5e1b556c0007442156"/>
     <item
-        dex="/home/maximus/AndroidStudioProjects/Android-Alarm-Clock-master/app/build/intermediates/pre-dexed/debug/classes-3aa8ee315e31a12e4def945377cc4e4c089a67b3.jar"
-        jar="/home/maximus/AndroidStudioProjects/Android-Alarm-Clock-master/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/classes.jar"
+        dex="/home/moritz/Dropbox/Projects/shoot-the-alarm/androidApp/Android-Alarm-Clock-master/app/build/intermediates/pre-dexed/debug/classes-7fbfb5542a3a88f28cff36bd582860935143f4b4.jar"
+        jar="/home/moritz/Dropbox/Projects/shoot-the-alarm/androidApp/Android-Alarm-Clock-master/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/18.0.0/classes.jar"
         jumboMode="false"
         revision="20.0.0"
         sha1="8f11f56e350eacabf2273f646d981356eea0ed77"/>
