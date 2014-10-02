@@ -21,6 +21,7 @@ http://raspberrypiguide.de/howtos/raspberry-pi-gpio-how-to/
 
 # ANDROID
 - Android App bauen
+- (https://github.com/SheldonNeilson/Android-Alarm-Clock)
 - Android Wecker abfangen
 - Bluetoothverbindung mit PI herstellen
 - sinnvolle Signale über die Verbindung senden
