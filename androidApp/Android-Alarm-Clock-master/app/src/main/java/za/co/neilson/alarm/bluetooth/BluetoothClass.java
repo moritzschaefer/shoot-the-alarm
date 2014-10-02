@@ -1,5 +1,5 @@
 
-package com.example.android.bluetoothlegatt;
+package za.co.neilson.alarm.bluetooth;
 
 import android.app.Activity;
 import android.app.ListActivity;
@@ -23,6 +23,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import za.co.neilson.alarm.alert.AlarmAlertActivity;
+
 /**
  * Activity for scanning and displaying available Bluetooth LE devices.
  *
@@ -34,10 +36,10 @@ public class BluetoothClass  {
     private boolean mScanning;
 
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 10000;
-    private Activity parent;
+    private static final long SCAN_PERIOD = 4000;
+    private AlarmAlertActivity parent;
 
-    public BluetoothClass(Activity parent) {
+    public BluetoothClass(AlarmAlertActivity parent) {
         mHandler = new Handler();
         mScanning = false;
         this.parent = parent;
@@ -46,10 +48,11 @@ public class BluetoothClass  {
             (BluetoothManager) parent.getSystemService(Context.BLUETOOTH_SERVICE);
         mBluetoothAdapter = bluetoothManager.getAdapter();
         if (mBluetoothAdapter == null) {
-            Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
-            finish();
+            //Toast.makeText(this, R.string.error_bluetooth_not_supported, Toast.LENGTH_SHORT).show();
+            //finish();
             return;
         }
+        scanAndConnectLeDevice();
     }
 
     public void scanAndConnectLeDevice() {
@@ -68,30 +71,31 @@ public class BluetoothClass  {
         mScanning = true;
         mBluetoothAdapter.startLeScan(mLeScanCallback);
     }
-    private scanDevice() {
-        /* Scan a specific device for services and characteristics */
-
-    }
 
     // Device scan callback.
     private BluetoothAdapter.LeScanCallback mLeScanCallback =
         new BluetoothAdapter.LeScanCallback() {
             @Override
             public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
-                runOnUiThread(new Runnable() {
+                parent.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         // TODO add important stuff here
-                        final Intent intent = new Intent(this, DeviceControlActivity.class);
+                        final Intent intent = new Intent(parent, DeviceControlActivity.class);
                         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
                         intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
                         if (mScanning) {
                             mBluetoothAdapter.stopLeScan(mLeScanCallback);
                             mScanning = false;
                         }
-                        startActivity(intent);
-                    });
-                }
-            };
-        }
+                        stopAlarm();
+                        parent.startActivity(intent);
+                    }
+                });
+            }
+        };
+
+    public void stopAlarm() {
+        parent.bluetoothQuit();
+    }
 }

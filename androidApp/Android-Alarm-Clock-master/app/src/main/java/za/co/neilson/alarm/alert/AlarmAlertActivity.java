@@ -15,7 +15,7 @@ import za.co.neilson.alarm.Alarm;
 import za.co.neilson.alarm.R;
 
 import android.app.Activity;
-import android.bluetooth.BluetoothClass;
+import za.co.neilson.alarm.bluetooth.BluetoothClass;
 import android.content.Context;
 import android.graphics.Color;
 import android.media.AudioManager;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.bluetoothlegatt;
+package za.co.neilson.alarm.bluetooth;
 
 import android.app.Service;
 import android.bluetooth.BluetoothAdapter;
