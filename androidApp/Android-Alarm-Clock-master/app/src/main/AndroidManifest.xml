@@ -54,7 +54,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 	        <meta-data
 	            android:name="android.support.PARENT_ACTIVITY"
 	            android:value="za.co.neilson.alarm.AlarmActivity" />
-        </activity>        
+        </activity>
+        <service
+            android:name="za.co.neilson.alarm.bluetooth.BluetoothLeService"
+            android:enabled="true"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+        <intent-filter>
+            <action android:name="android.accessibilityservice.AccessibilityService" />
+        </intent-filter>
+        </service>
 
         <service
             android:process="za.co.neilson.alarm.serviceProcess"

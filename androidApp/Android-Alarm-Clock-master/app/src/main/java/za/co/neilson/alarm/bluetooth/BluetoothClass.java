@@ -29,6 +29,7 @@ import za.co.neilson.alarm.alert.AlarmAlertActivity;
  * Activity for scanning and displaying available Bluetooth LE devices.
  *
  */
+
 public class BluetoothClass  {
 
     private BluetoothAdapter mBluetoothAdapter;
@@ -36,7 +37,7 @@ public class BluetoothClass  {
     private boolean mScanning;
 
     // Stops scanning after 10 seconds.
-    private static final long SCAN_PERIOD = 4000;
+    private static final long SCAN_PERIOD = 10000;
     private AlarmAlertActivity parent;
 
     public BluetoothClass(AlarmAlertActivity parent) {
@@ -81,15 +82,12 @@ public class BluetoothClass  {
                     @Override
                     public void run() {
                         // TODO add important stuff here
-                        final Intent intent = new Intent(parent, DeviceControlActivity.class);
-                        intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_NAME, device.getName());
-                        intent.putExtra(DeviceControlActivity.EXTRAS_DEVICE_ADDRESS, device.getAddress());
                         if (mScanning) {
                             mBluetoothAdapter.stopLeScan(mLeScanCallback);
                             mScanning = false;
                         }
-                        stopAlarm();
-                        parent.startActivity(intent);
+                        //parent.setDevice(device);
+                        //stopAlarm();
                     }
                 });
             }

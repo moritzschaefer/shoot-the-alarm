@@ -59,5 +59,11 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
     <string name="label_device_address">Device Address</string>
     <string name="label_state">State:</string>
     <string name="label_data">Data:</string>
+    <string name="menu_connect">Connect</string>
+    <string name="menu_disconnect">Disconnect</string>
+    <string name="menu_scan">Scan</string>
+    <string name="menu_stop">Stop</string>
+    <string name="menu_item_delete_all">Delete all</string>
+    <string name="menu_item_alert_activity">Start Alert Activity</string>
 
 </resources>

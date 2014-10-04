@@ -47,5 +47,15 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
         android:title="@string/menu_item_report"
         android:icon="@drawable/glyphicons_340_globe">
     </item>
+    <item
+        android:id="@+id/menu_item_delete_all"
+        android:title="@string/menu_item_delete_all"
+        android:icon="@drawable/glyphicons_016_bin">
+    </item>
+    <item
+        android:id="@+id/menu_item_alert_activity"
+        android:title="@string/menu_item_alert_activity"
+        android:icon="@drawable/glyphicons_016_bin">
+    </item>
 
 </menu>

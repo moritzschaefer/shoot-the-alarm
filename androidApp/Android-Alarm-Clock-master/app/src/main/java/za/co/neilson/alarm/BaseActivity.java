@@ -13,6 +13,7 @@ package za.co.neilson.alarm;
 
 import java.lang.reflect.Field;
 
+import za.co.neilson.alarm.database.Database;
 import za.co.neilson.alarm.preferences.AlarmPreferencesActivity;
 import za.co.neilson.alarm.service.AlarmServiceBroadcastReciever;
 import android.content.ActivityNotFoundException;
@@ -81,6 +82,9 @@ public abstract class BaseActivity  extends ActionBarActivity implements android
 				Toast.makeText(this, "Couldn't launch the website", Toast.LENGTH_LONG).show();
 			}
 			break;
+
+
+
 		case R.id.menu_item_report:
 			
 			url = "https://github.com/SheldonNeilson/Android-Alarm-Clock/issues";
