@@ -136,12 +136,19 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
                 clearUI();
             } else if (BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED.equals(action)) {
                 // Show all the supported services and characteristics on the user interface.
+                enableNotifyRx(mBluetoothLeService.getSupportedGattServices());
                 displayGattServices(mBluetoothLeService.getSupportedGattServices());
+
+
             } else if (BluetoothLeService.ACTION_DATA_AVAILABLE.equals(action)) {
-                displayData(intent.getStringExtra(BluetoothLeService.EXTRA_DATA));
+                displayData(new String(intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA)));
+            } else if (BluetoothLeService.ACTION_STOP_ALARM.equals(action)) {
+                displayData(new String(intent.getByteArrayExtra(BluetoothLeService.EXTRA_DATA)));
+                bluetoothQuit();
             } else if (BluetoothLeService.ACTION_FOUND_DEVICE.equals(action)) {
                 Log.i(TAG, "received FOUND DEVICE. call connect here..");
                 setDevice(intent.getStringExtra(BluetoothLeService.EXTRA_DEVICE_NAME), intent.getStringExtra(BluetoothLeService.EXTRA_DEVICE_ADDRESS));
+                mBluetoothLeService.connect(mDeviceAddress);
             }
         }
     };
@@ -266,7 +273,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
 
 
     private void startAlarm() {
-
+        alarmActive = true;
 
 
         if (alarm.getAlarmTonePath() != "") {
@@ -365,6 +372,42 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
         this.finish();
     }
 
+    private void enableNotifyRx(List<BluetoothGattService> gattServices) {
+        if (gattServices == null) return;
+
+        // Loops through available GATT Services.
+        for (BluetoothGattService gattService : gattServices) {
+
+            List<BluetoothGattCharacteristic> gattCharacteristics =
+                    gattService.getCharacteristics();
+
+            // Loops through available Characteristics.
+            for (BluetoothGattCharacteristic gattCharacteristic : gattCharacteristics) {
+                if (gattCharacteristic.getUuid().equals(BluetoothLeService.UUID_BLE_SHIELD_RX)) {
+                    //Enable listen
+
+                    final int charaProp = gattCharacteristic.getProperties();
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_READ) > 0) {
+                        // If there is an active notification on a characteristic, clear
+                        // it first so it doesn't update the data field on the user interface.
+                        if (mNotifyCharacteristic != null) {
+                            mBluetoothLeService.setCharacteristicNotification(
+                                    mNotifyCharacteristic, false);
+                            mNotifyCharacteristic = null;
+                        }
+                        mBluetoothLeService.readCharacteristic(gattCharacteristic);
+                    }
+                    if ((charaProp | BluetoothGattCharacteristic.PROPERTY_NOTIFY) > 0) {
+                        mNotifyCharacteristic = gattCharacteristic;
+                        mBluetoothLeService.setCharacteristicNotification(
+                                gattCharacteristic, true);
+                    }
+
+                }
+            }
+        }
+
+    }
 
     // Demonstrates how to iterate through the supported GATT Services/Characteristics.
     // In this sample, we populate the data structure that is bound to the ExpandableListView
@@ -430,6 +473,7 @@ public class AlarmAlertActivity extends Activity implements OnClickListener {
         intentFilter.addAction(BluetoothLeService.ACTION_GATT_SERVICES_DISCOVERED);
         intentFilter.addAction(BluetoothLeService.ACTION_DATA_AVAILABLE);
         intentFilter.addAction(BluetoothLeService.ACTION_FOUND_DEVICE);
+        intentFilter.addAction(BluetoothLeService.ACTION_STOP_ALARM);
         return intentFilter;
     }
 
