@@ -13,6 +13,7 @@ package za.co.neilson.alarm;
 
 import java.util.List;
 
+import za.co.neilson.alarm.alert.AlarmAlertActivity;
 import za.co.neilson.alarm.database.Database;
 import za.co.neilson.alarm.preferences.AlarmPreferencesActivity;
 import za.co.neilson.alarm.R;
@@ -24,6 +25,7 @@ import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.view.HapticFeedbackConstants;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -58,8 +60,9 @@ public class AlarmActivity extends BaseActivity {
 				dialog.setPositiveButton("Ok", new OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
+                        Database.init(AlarmActivity.this);
 
-						Database.init(AlarmActivity.this);
+
 						Database.deleteEntry(alarm);
 						AlarmActivity.this.callMathAlarmScheduleService();
 						
@@ -96,7 +99,30 @@ public class AlarmActivity extends BaseActivity {
 
 		});
 	}
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_item_delete_all:
+                Database.init(AlarmActivity.this);
+                for (int i = 0; i < alarmListAdapter.getCount(); i++) {
+                    Database.deleteEntry((Alarm) alarmListAdapter.getItem(i));
+                }
+                AlarmActivity.this.callMathAlarmScheduleService();
 
+                updateAlarmList();
+                break;
+            case R.id.menu_item_alert_activity:
+                if(alarmListAdapter.getCount() == 0) {
+                    Toast.makeText(this, "You need an alarm to spawn this activity..", Toast.LENGTH_SHORT);
+                } else {
+                    Intent intent = new Intent(AlarmActivity.this, AlarmAlertActivity.class);
+                    intent.putExtra("alarm", (Alarm) alarmListAdapter.getItem(0));
+                    startActivity(intent);
+                }
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		boolean result = super.onCreateOptionsMenu(menu);		

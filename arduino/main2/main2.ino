@@ -4,6 +4,8 @@
 #include <RBL_services.h>
 
 //Input PIN
+int num = 0;
+char numString[20];
 int inputPiezo = A0;
 int outputLed = 13;
 int val = 0;
@@ -22,12 +24,13 @@ void loop() {
   // read the sensor and store it in the variable sensorReading:
   sensorReading = analogRead(inputPiezo);
 
+
   // if the sensor reading is greater than the threshold:
   if (sensorReading >= threshold) {
+	num += 1;
     digitalWrite(outputLed, HIGH);
     sendBluetooth();
     delay(1000);
-    ble_write('0');
 
     digitalWrite(outputLed, LOW);
     // send the string "Knock!" back to the computer, followed by newline
@@ -39,5 +42,8 @@ void loop() {
 }
 
 void sendBluetooth() {
-
+	int numChars = sprintf(numString, "%d", num);
+	for(int i=0; i<numChars; i++) {
+		ble_write(numString[i]);
+	}
 }

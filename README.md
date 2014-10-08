@@ -44,3 +44,6 @@ http://raspberrypiguide.de/howtos/raspberry-pi-gpio-how-to/
 - Chat Example (where was it from?)
 -
 
+# ARDUINO
+sendet  an connected device immer ein byte wenn piezo gedrückt wird
+check arduino ble sdk to change ble device propagation name!

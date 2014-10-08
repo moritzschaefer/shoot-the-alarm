@@ -1,0 +1,4 @@
+see http://www.arduino.cc/en/Tutorial/Knock
+
+PIEZO Input is A0
+LED Output is LED 13
