@@ -1,49 +1,15 @@
 shoot-the-alarm
 ===============
 
-TODO
-----
-- Batch datei, welche die Ports von alleine ausführt,
-	Im Moment sind GPIO3 und GPIO14 IN/OUT
+## Description
+
+This project contains code for a "Blend Micro" (an Arduino with Bluetooth Low Energy) and an Android App. The Android App is basically an Alarm clock whick scans waits for a Bluetooth signal to stop the alarm.
+The Blend Micro board is connecting to a piezo which triggers the shot of an airgun and sends the bluetooth signal to stop the alarm of the Android phone.
+
+## Structure
+
+Find the code for the Arduino board in arduino/main2/main2.ino.
+The file states as well the outputs/inputs as does hardware/link.txt as well.
+The smartphone app is in androidApp/ API Level 18 (4.3) is required (due to BLE)
 
 
-# LINKS
-http://sourceforge.net/p/raspberry-gpio-python/wiki/Inputs/
-http://raspberrywebserver.com/gpio/using-interrupt-driven-gpio.html
-http://raspberrypiguide.de/howtos/raspberry-pi-gpio-how-to/
-
-
-# SCHALTKREIS
-- Den Schaltkreis bauen,
-	- ersteinmal Schaltkreis ohne Knopf gebaut, direkter IN/OUT Verbund
-	- immo Presspoint mit Widerstand zu simulieren
-
-
-# ANDROID
-- Android App bauen
-- (https://github.com/SheldonNeilson/Android-Alarm-Clock)
-- Android Wecker abfangen
-- Bluetoothverbindung mit PI herstellen
-- sinnvolle Signale über die Verbindung senden
-- PI einrichten
-
-
-# DOKUMENTATION
-- Kreislauf ohne Schalter von IN direkt in OUT
-- unnützer C-Code, der die Lampe zum blinken bringt
-
-
-# GEMACHT
-- Code auf dem PI ausführen
-- Python einlesen
-- GPIO ansteuern (OUT und IN)
-- Noch einmal den Code mit der blinkenden Lampe zum laufen gebracht (Wiederholung)
-
-
-# VERWENDETE SOFTWARE
-- Chat Example (where was it from?)
--
-
-# ARDUINO
-sendet  an connected device immer ein byte wenn piezo gedrückt wird
-check arduino ble sdk to change ble device propagation name!
